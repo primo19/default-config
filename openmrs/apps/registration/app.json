@@ -79,6 +79,10 @@
                     "translationKey": "REGISTRATION_PRINT_WITH_BARCODE",
                     "templateUrl": "/bahmni_config/openmrs/apps/registration/registrationCardLayout/printWithBarcode.html",
                     "shortcutKey": "c"
+                },
+                {
+                    "translationKey": "Print QR Code",
+                    "templateUrl": "/bahmni_config/openmrs/apps/registration/registrationCardLayout/printQRCode.html"
                 }
             ],
             "conceptSetUI": {

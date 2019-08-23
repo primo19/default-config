@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="/bahmni_config/openmrs/apps/registration/registrationCardLayout/css/print.css"/>
+<table border="1" cellpadding="0" cellspacing="1" class="registrationCard-print-table">
+    <tbody>
+    <tr>
+        <td class="print-table-left" valign="top">
+            <table class="registrationCard-details">
+                <tbody>
+                <tr class="hidden">
+                    <td class="registrationCard-details-name">
+                        <span class="hindi-text">Registration Date</span>
+                    </td>
+                    <td class="registrationCard-details-seperator"> :  </td>
+                    <td id="regdate">{{patient.registrationDate | bahmniDate}} </td>
+                </tr>
+            
+                <tr class="hidden">
+                    <td class="registrationCard-details-name">
+                        <span class="hindi-text">Full Name</span>
+                    </td>
+                    <td class="registrationCard-details-seperator"> :  </td>
+                    <td>
+                        <span id="fullname" class="hindi-text">{{patient.fullNameLocal()}}</span>
+                    </td>
+                </tr>
+                <tr class="hidden">
+                    <td class="registrationCard-details-name">
+                        <span class="hindi-text">Age</span>
+                    </td>
+                    <td class="registrationCard-details-seperator"> :  </td>
+                    <td id="patientAge">{{patient.age | age}} </td>
+                </tr>
+                <tr class="hidden">
+                    <td class="registrationCard-details-name">
+                        <span class="hindi-text">Gender</span>
+                    </td>
+                    <td class="registrationCard-details-seperator"> :  </td>
+                    <td id="patientGender">{{patient.gender}} </td>
+                </tr>
+            
+                <tr class="hidden">
+                    <td class="registrationCard-details-name">
+                        <span class="hindi-text">Village</span>
+                    </td>
+                    <td class="registrationCard-details-seperator"> :  </td>
+                    <td id="patientCity">{{patient.address.cityVillage}} </td>
+                </tr>
+            
+                <tr>
+                <td>
+                    <div id="pProfile"></div>
+                    <div id="patientID" class="title hidden">{{patient.primaryIdentifier.identifier}}</div>
+                </td>
+                <td>
+                    <div id="pProfileURL" style="margin-left: 20px"></div>
+                    <p id="patienURLid" class="hidden">{{patient.uuid}}</p>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<script src="/bahmni_config/openmrs/apps/qrcode.js"></script>
+
+<script>
+    let regDate = document.getElementById("regdate");
+    let fullName = document.getElementById("fullname");
+    let age = document.getElementById("patientAge");
+    let gender = document.getElementById("patientGender");
+    let city = document.getElementById("patientCity");
+    let id = document.getElementById("patientID");
+
+    var qrcode = new QRCode("pProfile", {
+        text: "Registration Date: " + regDate.textContent
+               + "\nFullname: " + fullName.textContent
+               + "\nAge: " + age.textContent
+               + "\nGender: " + gender.textContent
+               + "\nCity: " + city.textContent
+               + "\nPatient ID: " + id.textContent,
+        width: 177,
+        height: 177,
+        colorDark : "#990000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    const patientUuid = document.getElementById("patienURLid");
+
+    var qrcode2 = new QRCode("pProfileURL", {
+        text: window.location.href + "#" + "/patient/" + patientUuid.textContent,
+        width: 177,
+        height: 177,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+</script>
